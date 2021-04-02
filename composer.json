@@ -1,0 +1,10 @@
+{
+  "name": "ibu/online-shop",
+  "description": "Online shop system",
+  "license": "Apache2",
+  "authors": [{
+    "name": "haris-hukara",
+    "email": "haris.hukara@stu.ibu.edu.ba"
+  }],
+  "require": {}
+}
