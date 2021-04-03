@@ -18,9 +18,16 @@ class BaseDao {
       public function query($query, $params){
           $stmt = $this->connection->prepare($query);
           $stmt->execute($params);
-          return $stmt->fetchAll();
+          return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       }
+
+      public function query_unique($query, $params){
+          $results = $this->query($query, $params);
+          return reset($results);
+  
+      }
+
 
     }
  ?>
