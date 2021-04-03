@@ -3,7 +3,7 @@ require_once dirname(__FILE__)."/../config.php";
 
 class BaseDao {
 
-  private $connection;
+  protected $connection;
 
   public function __construct(){
       try {
@@ -25,7 +25,7 @@ class BaseDao {
       public function query_unique($query, $params){
           $results = $this->query($query, $params);
           return reset($results);
-  
+
       }
 
 
