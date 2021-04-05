@@ -7,13 +7,18 @@ class BaseDao {
 
   public function __construct(){
       try {
-        $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME, Config::DB_USERNAME, Config::DB_PASSWORD);
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->connection = new PDO("mysql:host=".Config::DB_HOST.
+                                       ";dbname=".Config::DB_SCHEME,
+                                                  Config::DB_USERNAME,
+                                                  Config::DB_PASSWORD);
+
+        $this->connection->setAttribute(PDO::ATTR_ERRMODE,
+                                        PDO::ERRMODE_EXCEPTION);
+
       } catch(PDOException $e) {
         throw $e;
       }
     }
-
 
       public function query($query, $params){
           $stmt = $this->connection->prepare($query);
@@ -26,6 +31,20 @@ class BaseDao {
           $results = $this->query($query, $params);
           return reset($results);
 
+      }
+
+      public function update($table, $id, $entity, $id_column ="id"){
+          $query = "UPDATE ${table} SET ";
+          foreach ($entity as $name => $value) {
+            $query .= $name ."= :".$name. ", ";
+            }
+
+          $query = substr($query, 0, -2);
+          $query .= " WHERE {$id_column} = :id";
+
+          $stmt= $this->connection->prepare($query);
+          $entity['$id'] = $id;
+          $stmt->execute($entity);
       }
 
 

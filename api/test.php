@@ -9,9 +9,8 @@ require_once dirname(__FILE__)."/dao/UserDao.class.php";
 $user_dao = new UserDao();
 
 
-$user1 = ["name" => "Edin Dzeko",
-          "email" => "edin.dzeko@gmail.com",
-          "password" => "123dzeko"];
+$user1 = [
+          "password" => "dzekson"];
 
 
 
